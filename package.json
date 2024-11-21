@@ -1,0 +1,33 @@
+{
+  "name": "nem",
+  "version": "1.0.0",
+  "description": "A CLI tool to quickly generate a boilerplate for Node.js, Express, and MongoDB applications. Customize your project setup by enabling options like authentication, and automatically install necessary dependencies. Ideal for developers who need to quickly scaffold a backend app with MongoDB integration and Express middleware",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "nem": "./bin/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bharatraj1508/create-nem.git"
+  },
+  "keywords": [
+    "mongodb",
+    "express",
+    "node",
+    "boilerplate",
+    "nem",
+    "scaffold"
+  ],
+  "author": "Bharat Raj Verma",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bharatraj1508/create-nem/issues"
+  },
+  "homepage": "https://github.com/bharatraj1508/create-nem#readme",
+  "dependencies": {
+    "commander": "^12.1.0"
+  }
+}
