@@ -16,6 +16,10 @@ const commands = [
     desc: "\ninstalling mongoose library",
   },
   {
+    command: "npm install dotenv",
+    desc: "\ninstalling dotenv",
+  },
+  {
     command: "npm install body-parser",
     desc: "\ninstalling body-parser",
   },
