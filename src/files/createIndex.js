@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 const createIndex = (dirPath) => {
-  const sourceFilePath = path.join(__dirname, "..", "index.js");
+  const sourceFilePath = path.join(__dirname, "..", "..", "index.js");
   let contentToWrite;
   try {
     contentToWrite = fs.readFileSync(sourceFilePath, "utf8");

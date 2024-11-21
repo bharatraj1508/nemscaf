@@ -3,8 +3,8 @@
 const fs = require("fs");
 const path = require("path");
 const { Command } = require("commander");
-const { installPackages } = require("../dependencies/execDependency");
-const { createIndex } = require("../files/createIndex");
+const { installPackages } = require("../src/dependencies/execDependency");
+const { createIndex } = require("../src/files/createIndex");
 
 const program = new Command();
 
