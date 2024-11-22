@@ -1,14 +1,24 @@
 const fs = require("fs");
 const path = require("path");
 
-const createUserRoutes = (dirPath) => {
+const createUserRoutes = (dirPath, options) => {
   // Define files to copy and their target paths
-  const userRoutesFile = path.join(
-    __dirname,
-    "files",
-    "routes",
-    "userRoutes.js"
-  );
+
+  let userRoutesFile;
+
+  options.passport
+    ? (userRoutesFile = path.join(
+        __dirname,
+        "files",
+        "routes",
+        "passportUserRoutes.js"
+      ))
+    : (userRoutesFile = path.join(
+        __dirname,
+        "files",
+        "routes",
+        "userRoutes.js"
+      ));
 
   // Read and write files
   try {

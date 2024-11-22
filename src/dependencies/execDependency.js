@@ -1,7 +1,26 @@
 const { execSync } = require("child_process");
 const commands = require("./commandList");
 
-const installPackages = async () => {
+const installPackages = async (options) => {
+  if (options.passport) {
+    commands.push(
+      {
+        command: "npm install passport",
+        desc: "installing passport js for authentication",
+      },
+      {
+        command: "npm install passport-jwt",
+        desc: "installing passport jwt strategy",
+      }
+    );
+  }
+  if (options.joi) {
+    commands.push({
+      command: "npm install joi",
+      desc: "installing joi for user validations",
+    });
+  }
+
   try {
     console.log("Installing dependencies...\n");
 

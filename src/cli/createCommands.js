@@ -5,7 +5,7 @@ const { createIndex, createDotEnvFile } = require("../fs/createIndex");
 const { createStructure } = require("../structure/createStructure");
 const { logTaskProgress, logCompletion } = require("../utils/logger");
 
-const createCommand = (dirName) => {
+const createCommand = (dirName, options) => {
   const currentDir = process.cwd();
   const dirPath = path.join(currentDir, dirName);
 
@@ -23,11 +23,11 @@ const createCommand = (dirName) => {
   process.chdir(dirPath);
 
   // Install dependencies
-  installPackages();
+  installPackages(options);
 
   // Create project structure
   console.log("Creating project structure");
-  createStructure(dirPath, logTaskProgress);
+  createStructure(dirPath, logTaskProgress, options);
 
   // Read and write content from a template file (source file) to index.js
   createIndex(dirPath);

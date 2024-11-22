@@ -3,7 +3,7 @@ const { createAuthentication } = require("../fs/createAuth");
 const { createUserController } = require("../fs/createUserController");
 const { createUserRoutes } = require("../fs/createUserRoutes");
 
-const createStructure = (dirPath, logTaskProgress) => {
+const createStructure = (dirPath, logTaskProgress, options) => {
   const tasks = [
     {
       index: 1,
@@ -14,7 +14,7 @@ const createStructure = (dirPath, logTaskProgress) => {
     {
       index: 2,
       name: "auth",
-      fn: (dir) => createAuthentication(dir),
+      fn: (dir) => createAuthentication(dir, options),
       desc: "creating authentication routes and controller",
     },
     {
@@ -26,7 +26,7 @@ const createStructure = (dirPath, logTaskProgress) => {
     {
       index: 4,
       name: "routes",
-      fn: (dir) => createUserRoutes(dir),
+      fn: (dir) => createUserRoutes(dir, options),
       desc: "creating user routes",
     },
   ];
