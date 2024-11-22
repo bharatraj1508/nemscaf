@@ -3,7 +3,7 @@ const User = mongoose.model("User");
 const { newAccessToken } = require("../utils/jwt");
 
 const registerUser = async (req, res) => {
-  const { email, password } = req.body;
+  const { name, email, password } = req.body;
   try {
     const existingUser = await User.findOne({ email });
 
@@ -14,6 +14,7 @@ const registerUser = async (req, res) => {
     }
 
     const user = await new User({
+      name,
       email,
       password,
     }).save();

@@ -12,6 +12,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const authRoutes = require("./src/routes/authRoutes");
+const userRoutes = require("./src/routes/userRoutes");
 
 mongoose.connect(process.env.MONGOURI);
 
@@ -24,6 +25,7 @@ mongoose.connection.on("error", (error) => [
 ]);
 
 app.use("/auth", authRoutes);
+app.use("/user", userRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).send({ message: "Server is online" });
