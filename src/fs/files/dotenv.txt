@@ -1,1 +1,2 @@
 MONGOURI="your-mongo-uri-here"
+MY_SECRET_KEY="your-secret-key-here"

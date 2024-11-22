@@ -6,6 +6,7 @@ const { Command } = require("commander");
 const { installPackages } = require("../src/dependencies/execDependency");
 const { createIndex, createDotEnvFile } = require("../src/fs/createIndex");
 const { createModel } = require("../src/fs/createModels");
+const { createAuthentication } = require("../src/fs/createAuth");
 const program = new Command();
 
 const createProjectStructure = [
@@ -14,6 +15,12 @@ const createProjectStructure = [
     name: "models",
     fn: createModel,
     desc: "creating models",
+  },
+  {
+    index: 2,
+    name: "auth",
+    fn: createAuthentication,
+    desc: "creating authentication routes and controller",
   },
 ];
 
@@ -54,6 +61,12 @@ program
       switch (item.name) {
         case "models":
           item.fn(dirPath, "user");
+          process.stdout.clearLine();
+          process.stdout.cursorTo(0);
+          console.log(`\t${item.index}. ${item.desc}... \x1b[32m✔\x1b[0m`);
+          break;
+        case "auth":
+          item.fn(dirPath);
           process.stdout.clearLine();
           process.stdout.cursorTo(0);
           console.log(`\t${item.index}. ${item.desc}... \x1b[32m✔\x1b[0m`);

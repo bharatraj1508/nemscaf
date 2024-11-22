@@ -4,6 +4,10 @@ const commands = [
     desc: "initializing npm",
   },
   {
+    command: "git init",
+    desc: "initializing git",
+  },
+  {
     command: "npm install dotenv",
     desc: "installing dotenv",
   },
@@ -22,6 +26,10 @@ const commands = [
   {
     command: "npm install express",
     desc: "installing Express.js library",
+  },
+  {
+    command: "npm install jsonwebtoken",
+    desc: "installing jwt library",
   },
   {
     command: "npm install mongoose",
