@@ -1,31 +1,31 @@
 const commands = [
   {
     command: "npm init -y",
-    desc: "\ninitializing npm",
+    desc: "initializing npm",
   },
   {
     command: "npm install nodemon",
-    desc: "\ninstalling nodemon",
+    desc: "installing nodemon",
   },
   {
     command: "npm install express",
-    desc: "\ninstalling ExpressJs library",
+    desc: "installing Express.js library",
   },
   {
     command: "npm install mongoose",
-    desc: "\ninstalling mongoose library",
+    desc: "installing Mongoose library",
   },
   {
     command: "npm install dotenv",
-    desc: "\ninstalling dotenv",
+    desc: "installing dotenv",
   },
   {
     command: "npm install body-parser",
-    desc: "\ninstalling body-parser",
+    desc: "installing body-parser",
   },
   {
     command: "npm install cors",
-    desc: "\ninstalling cors",
+    desc: "installing cors",
   },
 ];
 
