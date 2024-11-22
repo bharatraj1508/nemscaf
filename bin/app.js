@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const { Command } = require("commander");
 const { installPackages } = require("../src/dependencies/execDependency");
-const { createIndex } = require("../src/files/createIndex");
+const { createIndex, createDotEnvFile } = require("../src/fs/createIndex");
 
 const program = new Command();
 
@@ -41,9 +41,15 @@ program
     // Read and write content from a template file (source file) to index.js
     createIndex(dirPath);
 
-    console.log("\nSetup complete!\n");
-    console.log(`\ncd ${dirName}`);
-    console.log(`npm install\n`);
+    //creating  .env file
+    createDotEnvFile(dirPath);
+
+    console.log("\x1b[32m\nSetup complete!\n\x1b[0m");
+    console.log("Things to do:\n");
+    console.log("\t1. cd " + dirName);
+    console.log("\t2. npm install");
+    console.log("\t3. Add your MongoDB URI to .env file");
+    console.log("\t4. nodemon index.js\n");
   });
 
 // Parse the command-line arguments

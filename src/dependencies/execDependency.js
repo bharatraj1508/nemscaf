@@ -1,21 +1,37 @@
 const { execSync } = require("child_process");
-
 const commands = require("./commandList");
 
-const installPackages = () => {
+const installPackages = async () => {
   try {
-    console.log("Installing dependencies...");
-    commands.forEach((cmd) => {
-      console.log(cmd.desc);
+    console.log("Installing dependencies...\n");
+
+    for (let i = 0; i < commands.length; i++) {
+      const { command, desc } = commands[i];
+
+      // Display the current task with a spinner
+      process.stdout.write(`\t${i + 1}. ${desc}... ⏳\x1b[?25l`);
+
       try {
-        execSync(cmd.command, { stdio: "inherit" });
+        execSync(command, { stdio: "ignore" });
+
+        // Replace spinner with a green tick
+        process.stdout.clearLine();
+        process.stdout.cursorTo(0);
+        console.log(`\t${i + 1}. ${desc}... \x1b[32m✔\x1b[0m`); // Success message with a green tick
       } catch (error) {
-        throw new Error(`Error executing command: ${error.message}`);
+        // Replace spinner with a red cross on failure
+        process.stdout.clearLine();
+        process.stdout.cursorTo(0);
+        console.error(`\t${i + 1}. ${desc}... \x1b[31m✘\x1b[0m`);
+        throw new Error(
+          `Failed to execute "${command}": ${error.message}\x1b[?25h`
+        );
       }
-    });
-    console.log("\nAll dependencies installed.");
+    }
+
+    console.log("\nAll dependencies installed successfully.\x1b[?25h\n");
   } catch (error) {
-    console.error(`Error: ${error.message}`);
+    console.error(`\nError: ${error.message}`);
     process.exit(1);
   }
 };
