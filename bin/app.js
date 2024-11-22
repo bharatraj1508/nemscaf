@@ -6,7 +6,7 @@ const { createCommand } = require("../src/cli/createCommands");
 const program = new Command();
 
 program
-  .name("nem")
+  .name("nemscaf")
   .description(
     "A Command Line Interface (CLI) tool to scaffold Node.js, Express, and MongoDB projects with customizable boilerplate code for authentication and validation."
   )
