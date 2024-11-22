@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const createAuthentication = (dirPath) => {
+const createAuthentication = (dirPath, options) => {
   const directories = [
     "src/controllers",
     "src/routes",
@@ -17,27 +17,49 @@ const createAuthentication = (dirPath) => {
     }
   });
 
-  // Define files to copy and their target paths
-  const authControllerFile = path.join(
-    __dirname,
-    "files",
-    "controllers",
-    "authController.js"
-  );
+  let authorizationFile;
+  let schemaFile;
+  let authControllerFile;
+
+  options.passport
+    ? (authorizationFile = path.join(
+        __dirname,
+        "files",
+        "utils",
+        "passport.js"
+      ))
+    : (authorizationFile = path.join(
+        __dirname,
+        "files",
+        "middlewares",
+        "requireAuth.js"
+      ));
+
+  if (options.joi) {
+    schemaFile = path.join(__dirname, "files", "utils", "validationSchema.js");
+    authControllerFile = path.join(
+      __dirname,
+      "files",
+      "controllers",
+      "joiAuthController.js"
+    );
+  } else {
+    authControllerFile = path.join(
+      __dirname,
+      "files",
+      "controllers",
+      "authController.js"
+    );
+  }
+
   const authRoutesFile = path.join(
     __dirname,
     "files",
     "routes",
     "authRoutes.js"
   );
-  const jwtFile = path.join(__dirname, "files", "utils", "jwt.js");
 
-  const reqAuthFile = path.join(
-    __dirname,
-    "files",
-    "middlewares",
-    "requireAuth.js"
-  );
+  const jwtFile = path.join(__dirname, "files", "utils", "jwt.js");
 
   const files = [
     {
@@ -55,12 +77,27 @@ const createAuthentication = (dirPath) => {
       path: "src/utils",
       name: "jwt.js",
     },
-    {
-      file: reqAuthFile,
-      path: "src/middlewares",
-      name: "requireAuth.js",
-    },
   ];
+
+  if (options.joi) {
+    files.push({
+      file: schemaFile,
+      path: "src/utils",
+      name: "validationSchema.js",
+    });
+  }
+
+  options.passport
+    ? files.push({
+        file: authorizationFile,
+        path: "src/middlewares",
+        name: "passport.js",
+      })
+    : files.push({
+        file: authorizationFile,
+        path: "src/middlewares",
+        name: "requireAuth.js",
+      });
 
   // Read and write files
   files.forEach((item) => {
