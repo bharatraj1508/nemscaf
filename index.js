@@ -1,4 +1,6 @@
 require("dotenv").config();
+require("./models/users");
+
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
