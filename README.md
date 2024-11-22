@@ -1,7 +1,6 @@
+# NEMSCAF CLI Tool
 
-# NEM CLI Tool
-
-**NEM (Node Express MongoDB)** is a Command Line Interface (CLI) tool designed to scaffold **Node.js**, **Express**, and **MongoDB** projects efficiently. This tool allows developers to generate a boilerplate project with customizable features like **authentication** and **data validation**, ensuring a faster and standardized development process.
+**NEMSCAF (Node Express MongoDB)** is a Command Line Interface (CLI) tool designed to scaffold **Node.js**, **Express**, and **MongoDB** projects efficiently. This tool allows developers to generate a boilerplate project with customizable features like **authentication** and **data validation**, ensuring a faster and standardized development process.
 
 ---
 
@@ -19,25 +18,25 @@
 To install the CLI globally, run:
 
 ```bash
-npm install -g nem-cli
+npm install -g nemscaf
 ```
 
 ---
 
 ## Usage
 
-After installation, you can use the `nem` command to create and manage projects.
+After installation, you can use the `nemscaf` command to create and manage projects.
 
 ### General Command
 
 ```bash
-nem
+nemscaf
 ```
 
 Displays the general help and available commands:
 
 ```plaintext
-Usage: nem [options] [command]
+Usage: nemscaf [options] [command]
 
 A Command Line Interface (CLI) tool to scaffold Node.js, Express, and MongoDB projects with customizable boilerplate code for authentication and validation.
 
@@ -57,22 +56,22 @@ The `create` command generates a new Node.js, Express, and MongoDB project.
 #### Usage
 
 ```bash
-nem create [options] <dirName>
+nemscaf create [options] <dirName>
 ```
 
 #### Arguments
 
-| Argument  | Description                      |
-|-----------|----------------------------------|
-| `dirName` | Name of the project directory.  |
+| Argument  | Description                    |
+| --------- | ------------------------------ |
+| `dirName` | Name of the project directory. |
 
 #### Options
 
 | Option       | Description                                   |
-|--------------|-----------------------------------------------|
-| `--passport` | Integrate PassportJS for user authentication.|
-| `--joi`      | Include Joi for request data validation.     |
-| `-h, --help` | Display help for the `create` command.       |
+| ------------ | --------------------------------------------- |
+| `--passport` | Integrate PassportJS for user authentication. |
+| `--joi`      | Include Joi for request data validation.      |
+| `-h, --help` | Display help for the `create` command.        |
 
 #### Examples
 
@@ -80,39 +79,40 @@ nem create [options] <dirName>
    Without any options, the CLI sets up a project using JWT for authentication and excludes input validation.
 
    ```bash
-   nem create my-app
+   nemscaf create my-app
    ```
 
 2. **With PassportJS Authentication**  
    Includes PassportJS for handling user authentication.
 
    ```bash
-   nem create my-app --passport
+   nemscaf create my-app --passport
    ```
 
 3. **With Joi Validation**  
    Adds Joi for request data validation.
 
    ```bash
-   nem create my-app --joi
+   nemscaf create my-app --joi
    ```
 
 4. **With Both PassportJS and Joi**  
    Combines PassportJS authentication with Joi validation.
 
    ```bash
-   nem create my-app --passport --joi
+   nemscaf create my-app --passport --joi
    ```
 
 ---
 
 ## Default Behavior
 
-- **Authentication:**  
+- **Authentication:**
+
   - If `--passport` is not specified, the project uses **JWT** for user authentication.
   - The default JWT setup includes token generation and verification functionalities.
 
-- **Validation:**  
+- **Validation:**
   - If `--joi` is not included, no input validation is applied. This means user input will not be sanitized before being saved to MongoDB.
 
 ---
@@ -150,7 +150,7 @@ my-app/
 ## Contributing
 
 Contributions, issues, and feature requests are welcome!  
-Feel free to check the [issues page](https://github.com/yourusername/nem-cli/issues) or submit a pull request.
+Feel free to check the [issues page](https://github.com/bharatraj1508/nemscaf/issues) or submit a pull request.
 
 ---
 
@@ -164,4 +164,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Developed by **[Bharat Raj Verma](https://github.com/bharatraj1508)**.
 
---- 
+---
