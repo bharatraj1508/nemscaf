@@ -4,16 +4,8 @@ const commands = [
     desc: "initializing npm",
   },
   {
-    command: "npm install nodemon",
-    desc: "installing nodemon",
-  },
-  {
-    command: "npm install express",
-    desc: "installing Express.js library",
-  },
-  {
-    command: "npm install mongoose",
-    desc: "installing Mongoose library",
+    command: "git init",
+    desc: "initializing git",
   },
   {
     command: "npm install dotenv",
@@ -26,6 +18,26 @@ const commands = [
   {
     command: "npm install cors",
     desc: "installing cors",
+  },
+  {
+    command: "npm install nodemon",
+    desc: "installing nodemon",
+  },
+  {
+    command: "npm install express",
+    desc: "installing Express.js library",
+  },
+  {
+    command: "npm install jsonwebtoken",
+    desc: "installing jwt library",
+  },
+  {
+    command: "npm install mongoose",
+    desc: "installing Mongoose library",
+  },
+  {
+    command: "npm install bcryptjs",
+    desc: "installing bcrypt library",
   },
 ];
 
