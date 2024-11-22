@@ -25,7 +25,7 @@ const createAuthentication = (dirPath, options) => {
     ? (authorizationFile = path.join(
         __dirname,
         "files",
-        "utils",
+        "middlewares",
         "passport.js"
       ))
     : (authorizationFile = path.join(
@@ -36,7 +36,12 @@ const createAuthentication = (dirPath, options) => {
       ));
 
   if (options.joi) {
-    schemaFile = path.join(__dirname, "files", "utils", "validationSchema.js");
+    schemaFile = path.join(
+      __dirname,
+      "files",
+      "middlewares",
+      "validationSchema.js"
+    );
     authControllerFile = path.join(
       __dirname,
       "files",
@@ -82,7 +87,7 @@ const createAuthentication = (dirPath, options) => {
   if (options.joi) {
     files.push({
       file: schemaFile,
-      path: "src/utils",
+      path: "src/middlewares",
       name: "validationSchema.js",
     });
   }

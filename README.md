@@ -137,12 +137,10 @@ my-app/
 
 ### Key Files and Directories
 
-- **`src/config`**: Configuration files (e.g., database and environment setup).
 - **`src/controllers`**: Handles the logic for each route.
 - **`src/middlewares`**: Middleware functions for authentication, validation, etc.
 - **`src/models`**: Mongoose schemas and models for MongoDB.
 - **`src/routes`**: Route definitions for the API.
-- **`src/services`**: Services that handle business logic.
 - **`src/utils`**: Utility functions (e.g., token generation, error handling).
 
 ---

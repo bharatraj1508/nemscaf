@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const User = mongoose.model("User");
 const { newAccessToken } = require("../utils/jwt");
-const { authSchema } = require("../utils/validationSchema");
+const { authSchema } = require("../middlewares/validationSchema");
 
 const registerUser = async (req, res) => {
   try {

@@ -40,8 +40,26 @@ const createCommand = (dirName, options) => {
       // Create `.env` file
       createDotEnvFile(dirPath);
 
+      //creating README.md
+      const readmeTemplatePath = path.join(
+        __dirname,
+        "..",
+        "fs",
+        "files",
+        "project_README.md"
+      );
+
+      let readmeContent = fs.readFileSync(readmeTemplatePath, "utf-8");
+      readmeContent = readmeContent.replace("{{ PROJECT_NAME }}", dirName);
+
+      const filePath = path.join(dirPath, "README.md");
+
+      fs.writeFileSync(filePath, readmeContent.trim(), { flag: "w" });
+
       //initializing git
+      console.log("\ngit initialization...\n");
       execSync("git init", { stdio: "ignore" });
+      execSync("npx gitignore node", { stdio: "inherit" });
 
       logCompletion(dirName);
     })
