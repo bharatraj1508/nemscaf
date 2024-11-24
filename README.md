@@ -131,8 +131,9 @@ my-app/
 │   └── utils/
 ├── .env
 ├── .gitignore
+├── index.js
 ├── package.json
-└── README.md
+└── README.md`
 ```
 
 ### Key Files and Directories
