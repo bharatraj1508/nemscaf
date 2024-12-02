@@ -2,6 +2,9 @@
 
 const { Command } = require("commander");
 const { createCommand } = require("../src/cli/createCommands");
+const { addModel } = require("../src/cli/addModel");
+const { checkModelStruct } = require("../src/structure/checkModelStructure");
+const { updateIndexFile } = require("../src/utils/updateIndexFile");
 
 const program = new Command();
 
@@ -35,5 +38,35 @@ program
 
     createCommand(dirName, options);
   });
+
+program
+  .command("add")
+  .description(
+    "Add a new model, controller or routes to the project directory."
+  )
+  .addCommand(
+    new Command("model")
+      .description(
+        "Add a new model. By default it will create schema with no attributes."
+      )
+      .argument("<modelName>", "Name of the model to add")
+      .argument(
+        "[attributes...]",
+        "Attributes for the model. [FIELDNAME:TYPE].\nFor example, nemscaf add model Products prodName:String price:Number (optional)"
+      )
+      .action((modelName, attributes) => {
+        checkModelStruct();
+
+        addModel(modelName, attributes)
+          .then(() => {
+            updateIndexFile(modelName);
+          })
+          .catch((error) => {
+            console.log(
+              `Error: Something went wrong while creating ${modelName} model.\nGot ${error}`
+            );
+          });
+      })
+  );
 
 program.parse(process.argv);
