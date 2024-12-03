@@ -63,7 +63,7 @@ program
           })
           .catch((error) => {
             console.log(
-              `Error: Something went wrong while creating ${modelName} model.\nGot ${error}`
+              `\x1b[31mError: Something went wrong while creating ${modelName} model.\nGot ${error}`
             );
           });
       })

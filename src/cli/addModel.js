@@ -10,8 +10,9 @@ const addModel = async (modelName, attributes) => {
   attributes.forEach((attr) => {
     if (!attr.includes(":")) {
       console.error(
-        `Invalid attribute format: '${attr}'. Expected a valid attribute:type pair, but no type was provided.`
+        `\x1b[31mInvalid attribute format: '${attr}'. Expected a valid attribute:type pair, but no type was provided.`
       );
+      process.exit(1);
     } else {
       const [key, type] = attr.split(":");
       if (MongooseSchema.includes(type)) {
@@ -20,7 +21,8 @@ const addModel = async (modelName, attributes) => {
         };
       } else {
         schemaDefinition = {};
-        return console.log(`Invalid Schema Type: ${type}`);
+        console.log(`\x1b[31mInvalid Schema Type: ${type}`);
+        process.exit(1);
       }
     }
   });

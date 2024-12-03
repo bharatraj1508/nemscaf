@@ -29,7 +29,7 @@ mongoose.model("${modelName}", ${modelName}Schema);
     return formattedTemplate;
   } catch (error) {
     console.error("Error processing model file:", error.message);
-    return null;
+    process.exit(1);
   }
 };
 
