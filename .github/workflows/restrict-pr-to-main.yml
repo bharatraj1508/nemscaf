@@ -1,12 +1,13 @@
 name: Restrict PR to main
 
 on:
-  pull_request:
+  pull_request:  # Trigger this workflow only on pull requests
     branches:
-      - main
+      - main  # This ensures the workflow triggers only when the target branch is 'main'
 
 jobs:
   check-source-branch:
+    if: github.base_ref == 'main'  # Run this job ONLY if the target branch is 'main'
     runs-on: ubuntu-latest
 
     steps:
