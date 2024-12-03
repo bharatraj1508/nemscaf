@@ -30,7 +30,8 @@ const updateIndexFile = (modelName) => {
     fs.writeFileSync(indexFilePath, updatedIndexFile.trim(), { flag: "w" });
     console.log(`\x1b[33mmodified - ${indexFilePath}`);
   } catch (error) {
-    console.error(`Failed to update index.js: ${error.message}`);
+    console.error(`\x1b[31mFailed to update index.js: ${error.message}`);
+    process.exit(1);
   }
 };
 

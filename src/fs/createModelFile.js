@@ -16,7 +16,10 @@ const createModelFile = (modelName, schemaDefinition) => {
       fs.writeFileSync(filePath, modelFile.trim(), { flag: "w" });
       console.log(`\x1b[32mcreated - ${filePath}`);
     } catch (error) {
-      console.log(`Error processing file ${modelFile}: ${error.message}`);
+      console.log(
+        `\x1b[31mError processing file ${modelFile}: ${error.message}`
+      );
+      process.exit(1);
     }
   });
 };
