@@ -1,5 +1,4 @@
-const fs = require("fs");
-const { promptQuestion } = require("./helper/promptQuestion");
+const { modelSchemaTypes } = require("./helper/getModelSchemaTypes");
 const { createActionDefinition } = require("./helper/createActionDefinition");
 const { createControllerFile } = require("./helper/createControllerFile");
 
@@ -18,21 +17,20 @@ const addController = async (controllerName, actions) => {
     }
   });
 
-  const modelLocation = `src/models/${formattedControllerName}.js`;
+  const schemaTypes = await modelSchemaTypes(formattedControllerName);
 
-  if (!fs.existsSync(modelLocation)) {
+  if (Object.keys(schemaTypes).length === 2) {
     console.log(
-      "\x1b[31mModel not found for the specified controller. If the model exists please specify its correct name."
+      `\x1b[31mThe '${formattedControllerName}' model lacks schema type definitions. ` +
+        `Please define the necessary schema types before proceeding with controller creation.`
     );
-
-    promptQuestion(
-      controllerName.charAt(0).toUpperCase() + controllerName.slice(1)
-    );
+    process.exit(1);
   }
 
-  const { actionDefinition, actionExports } = await createActionDefinition(
+  const { actionDefinition, actionExports } = createActionDefinition(
     actions,
-    formattedControllerName
+    formattedControllerName,
+    schemaTypes
   );
 
   await createControllerFile(controllerName, actionDefinition, actionExports);
