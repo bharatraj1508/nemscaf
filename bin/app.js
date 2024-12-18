@@ -3,7 +3,13 @@
 const { Command } = require("commander");
 const { createCommand } = require("../src/cli/createCommands");
 const { addModel } = require("../src/cli/addModel");
+const {
+  addController,
+} = require("../src/cli/addControllerCommand/addController");
 const { checkModelStruct } = require("../src/structure/checkModelStructure");
+const {
+  checkControllerStruct,
+} = require("../src/structure/checkControllerStructure");
 const { updateIndexFile } = require("../src/utils/updateIndexFile");
 
 const program = new Command();
@@ -66,6 +72,22 @@ program
               `\x1b[31mError: Something went wrong while creating ${modelName} model.\nGot ${error}`
             );
           });
+      })
+  )
+  .addCommand(
+    new Command("controller")
+      .description(
+        "Generate a new controller with predefined CRUD API endpoints. Run controller --help to learn more"
+      )
+      .argument("<modelName>", "Name of the model to create controller.")
+      .argument(
+        "[actions...]",
+        "Specific the actions to include for the controller (:index, :show, :create, :update, :destroy). Defaults to all if not specified."
+      )
+      .action((controllerName, actions) => {
+        checkControllerStruct();
+
+        addController(controllerName, actions);
       })
   );
 
