@@ -39,9 +39,6 @@ const modifyIndexFile = (controllerName) => {
 
     // Check if the route is already added
     if (fileContent.includes(routePath)) {
-      //   console.log(
-      //     `\x1b[33mRoute '${routePath}' is already registered in index.js.\x1b[0m`
-      //   );
       return;
     }
 

@@ -9,7 +9,7 @@ const createController = (controllerName, endpoints) => {
   executeCommand(
     `nemscaf add controller ${controllerName} ${endpoints.join(" ")}`,
     (stdout) => {
-      console.log(stdout);
+      if (stdout) console.log(stdout);
     }
   );
 };
