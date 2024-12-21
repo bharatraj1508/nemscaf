@@ -24,19 +24,20 @@ const createControllerFile = async (
     const currentDir = process.cwd();
 
     try {
+      var msg = "";
+
       const filePath = path.join(
         currentDir,
         "src/controllers",
         `${controllerName.toLowerCase()}Controller.js`
       );
 
-      if (fs.existsSync(filePath)) {
-        console.log("\x1b[31mError: Already existed");
-        process.exit(1);
-      }
+      fs.existsSync(filePath)
+        ? (msg = `\x1b[33mmodified - ${filePath}`)
+        : (msg = `\x1b[32mcreated - ${filePath}`);
 
       fs.writeFileSync(filePath, formattedTemplate.trim(), { flag: "w" });
-      console.log(`\x1b[32mcreated - ${filePath}`);
+      console.log(msg);
     } catch (error) {
       console.log(`\x1b[31mError processing file : ${error.message}`);
       process.exit(1);

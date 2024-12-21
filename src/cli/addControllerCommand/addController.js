@@ -1,6 +1,11 @@
+const fs = require("fs");
+const path = require("path");
+
 const { modelSchemaTypes } = require("./helper/getModelSchemaTypes");
 const { createActionDefinition } = require("./helper/createActionDefinition");
 const { createControllerFile } = require("./helper/createControllerFile");
+
+const { updateActions } = require("./helper/updateActions");
 
 const addController = async (controllerName, actions) => {
   const formattedControllerName =
@@ -25,6 +30,21 @@ const addController = async (controllerName, actions) => {
         `Please define the necessary schema types before proceeding with controller creation.`
     );
     process.exit(1);
+  }
+
+  const currDirec = process.cwd();
+  const controllerFileLoc = path.join(
+    currDirec,
+    "src/controllers",
+    `${formattedControllerName.toLowerCase()}Controller.js`
+  );
+
+  if (fs.existsSync(controllerFileLoc)) {
+    actions = updateActions(
+      formattedControllerName,
+      controllerFileLoc,
+      actions
+    );
   }
 
   const { actionDefinition, actionExports } = createActionDefinition(
