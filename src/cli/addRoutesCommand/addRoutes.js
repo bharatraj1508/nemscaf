@@ -9,6 +9,17 @@ const addRoutes = (controllerName, endpoints) => {
   const formattedControllerName =
     controllerName.charAt(0).toUpperCase() + controllerName.slice(1);
 
+  const definedActions = [":index", ":show", ":create", ":update", ":destroy"];
+
+  endpoints.forEach((a) => {
+    if (!definedActions.includes(a)) {
+      console.log(
+        `\x1b[31m'${a}' is not a valid action. Please specify actions out of ${definedActions.join(", ")}`
+      );
+      process.exit(1);
+    }
+  });
+
   const currDirec = process.cwd();
   const controllerFileLoc = path.join(
     currDirec,
