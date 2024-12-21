@@ -6,10 +6,12 @@ const { addModel } = require("../src/cli/addModel");
 const {
   addController,
 } = require("../src/cli/addControllerCommand/addController");
-const { checkModelStruct } = require("../src/structure/checkModelStructure");
+const { addRoutes } = require("../src/cli/addRoutesCommand/addRoutes");
 const {
+  checkModelStruct,
   checkControllerStruct,
-} = require("../src/structure/checkControllerStructure");
+  checkRoutesStruct,
+} = require("../src/structure/checkstructure");
 const { updateIndexFile } = require("../src/utils/updateIndexFile");
 
 const program = new Command();
@@ -88,6 +90,23 @@ program
         checkControllerStruct();
 
         addController(controllerName, actions);
+      })
+  )
+  .addCommand(
+    new Command("routes")
+      .description("Generate routes for the controller.")
+      .argument(
+        "<controllerName>",
+        "Name of the controller to create its routes."
+      )
+      .argument(
+        "[endpoints...]",
+        "Specific the endpoint to include routes for the controller (:index, :show, :create, :update, :destroy). Defaults to all if not specified."
+      )
+      .action((controllerName, endpoints) => {
+        checkRoutesStruct();
+
+        addRoutes(controllerName, endpoints);
       })
   );
 
