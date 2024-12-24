@@ -1,6 +1,6 @@
 {
   "name": "nemscaf",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A CLI tool to quickly generate a boilerplate for Node.js, Express, and MongoDB applications. Customize your project setup by enabling options like authentication, and automatically install necessary dependencies. Ideal for developers who need to quickly scaffold a backend app with MongoDB integration and Express middleware",
   "main": "index.js",
   "scripts": {
