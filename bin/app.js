@@ -2,6 +2,17 @@
 
 const { Command } = require("commander");
 const { createCommand } = require("../src/cli/createCommands");
+const { addModel } = require("../src/cli/addModel");
+const {
+  addController,
+} = require("../src/cli/addControllerCommand/addController");
+const { addRoutes } = require("../src/cli/addRoutesCommand/addRoutes");
+const {
+  checkModelStruct,
+  checkControllerStruct,
+  checkRoutesStruct,
+} = require("../src/structure/checkstructure");
+const { updateIndexFile } = require("../src/utils/updateIndexFile");
 
 const program = new Command();
 
@@ -35,5 +46,68 @@ program
 
     createCommand(dirName, options);
   });
+
+program
+  .command("add")
+  .description(
+    "Add a new model, controller or routes to the project directory."
+  )
+  .addCommand(
+    new Command("model")
+      .description(
+        "Add a new model. By default it will create schema with no attributes."
+      )
+      .argument("<modelName>", "Name of the model to add")
+      .argument(
+        "[attributes...]",
+        "Attributes for the model. [FIELDNAME:TYPE].\nFor example, nemscaf add model Products prodName:String price:Number (optional)"
+      )
+      .action((modelName, attributes) => {
+        checkModelStruct();
+
+        addModel(modelName, attributes)
+          .then(() => {
+            updateIndexFile(modelName);
+          })
+          .catch((error) => {
+            console.log(
+              `\x1b[31mError: Something went wrong while creating ${modelName} model.\nGot ${error}`
+            );
+          });
+      })
+  )
+  .addCommand(
+    new Command("controller")
+      .description(
+        "Generate a new controller with predefined CRUD API endpoints. Run controller --help to learn more"
+      )
+      .argument("<modelName>", "Name of the model to create controller.")
+      .argument(
+        "[actions...]",
+        "Specific the actions to include for the controller (:index, :show, :create, :update, :destroy). Defaults to all if not specified."
+      )
+      .action((controllerName, actions) => {
+        checkControllerStruct();
+
+        addController(controllerName, actions);
+      })
+  )
+  .addCommand(
+    new Command("routes")
+      .description("Generate routes for the controller.")
+      .argument(
+        "<controllerName>",
+        "Name of the controller to create its routes."
+      )
+      .argument(
+        "[endpoints...]",
+        "Specific the endpoint to include routes for the controller (:index, :show, :create, :update, :destroy). Defaults to all if not specified."
+      )
+      .action((controllerName, endpoints) => {
+        checkRoutesStruct();
+
+        addRoutes(controllerName, endpoints);
+      })
+  );
 
 program.parse(process.argv);
