@@ -46,6 +46,7 @@ Options:
 
 Commands:
   create [options] <dirName>  Generate a new project with Node.js, Express, and MongoDB. Customize the project setup with additional options for authentication and validation.
+  add <type> <name> [options] Add components like models, controllers, and routes to your project.
   help [command]              display help for command
 ```
 
@@ -105,15 +106,99 @@ nemscaf create [options] <dirName>
 
 ---
 
-## Default Behavior
+### Add Command
 
-- **Authentication:**
+The `add` command is used to generate components such as models, controllers, and routes for your project.
 
-  - If `--passport` is not specified, the project uses **JWT** for user authentication.
-  - The default JWT setup includes token generation and verification functionalities.
+#### Usage
 
-- **Validation:**
-  - If `--joi` is not included, no input validation is applied. This means user input will not be sanitized before being saved to MongoDB.
+```bash
+nemscaf add <type> <name> [options]
+```
+
+#### Supported Types
+
+1. **Models**
+   Add a new model to the project.
+
+   **Usage:**
+
+   ```bash
+   nemscaf add model <modelName> [attributes:dataTypes...]
+   ```
+
+   **Arguments**:
+
+   | Argument               | Description                                            |
+   | ---------------------- | ------------------------------------------------------ |
+   | `modelName`            | Name of the model.                                     |
+   | `attributes:dataTypes` | Schema attributes with Mongoose data types (optional). |
+
+   **Example:**
+
+   ```bash
+   nemscaf add model Product name:String price:Number available:Boolean
+   ```
+
+   If no attributes are given in the command then it will generate an empty schema which users can define by itself.
+
+2. **Controllers**
+   Add a new controller for a specific model.
+
+   **Usage:**
+
+   ```bash
+   nemscaf add controller <modelName> [actions...]
+   ```
+
+   **Arguments**:
+
+   | Argument    | Description                                                      |
+   | ----------- | ---------------------------------------------------------------- |
+   | `modelName` | Name of the model for which the controller will be created.      |
+   | `actions`   | Actions to define in the controller (e.g., `:create`, `:index`). |
+
+   **Supported Actions:**
+
+   | Action     | Description                              |
+   | ---------- | ---------------------------------------- |
+   | `:create`  | Creates a new record in the database.    |
+   | `:index`   | Retrieves all records from the database. |
+   | `:show`    | Retrieves a single record by its ID.     |
+   | `:update`  | Updates an existing record.              |
+   | `:destroy` | Deletes a specific record by its ID.     |
+
+   **Example:**
+
+   ```bash
+   nemscaf add controller Product :create :index :update :destroy
+   ```
+
+   This command generates a controller for an already defined model in the project. Additionally, if a user needs to add specific actions to an existing controller, they can do so by specifying the required actions within the same command.
+
+3. **Routes**
+   Add a new route for a specific controller.
+
+   **Usage:**
+
+   ```bash
+   nemscaf add route <controllerName> [actions...]
+   ```
+
+   **Arguments**:
+
+   | Argument         | Description                                                                     |
+   | ---------------- | ------------------------------------------------------------------------------- |
+   | `controllerName` | Name of the controller for which the routes will be generated.                  |
+   | `actions`        | Actions to define in the routes as an api endpoints (e.g., `:create`, `:index`) |
+
+   **Example:**
+
+   ```bash
+   nemscaf add route Product :create :index :show
+   ```
+
+   This command generates routes for HTTP methods like GET, POST, and DELETE, linking them to the appropriate controller actions. If no actions are provided it will geenrate the endpoints on the already defined actions inside the controller.
 
 ---
 
@@ -133,7 +218,7 @@ my-app/
 ├── .gitignore
 ├── index.js
 ├── package.json
-└── README.md`
+└── README.md
 ```
 
 ### Key Files and Directories
@@ -162,5 +247,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Author
 
 Developed by **[Bharat Raj Verma](https://github.com/bharatraj1508)**.
-
----
