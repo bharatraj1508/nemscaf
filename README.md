@@ -202,6 +202,31 @@ nemscaf add <type> <name> [options]
 
 ---
 
+### Scaffold Command
+
+The `scaffold` command is used to generate the model, controller and routes for the given attributes. It will generate all the CRUD endpoints.
+
+#### Usage
+
+```bash
+nemscaf scaffold <modelName> <attributes:dataTypes>
+```
+
+**Arguments**:
+
+| Argument               | Description                                 |
+| ---------------------- | ------------------------------------------- |
+| `modelName`            | Name of the model.                          |
+| `attributes:dataTypes` | Schema attributes with Mongoose data types. |
+
+**Example:**
+
+```bash
+nemscaf scaffold Product name:String price:Number available:Boolean
+```
+
+---
+
 ## Project Structure
 
 The generated project includes the following structure:
