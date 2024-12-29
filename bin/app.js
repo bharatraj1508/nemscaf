@@ -13,6 +13,7 @@ const {
   checkRoutesStruct,
 } = require("../src/structure/checkstructure");
 const { updateIndexFile } = require("../src/utils/updateIndexFile");
+const { scaffold } = require("../src/cli/scaffloldCommand/scaffold");
 
 const program = new Command();
 
@@ -109,5 +110,23 @@ program
         addRoutes(controllerName, endpoints);
       })
   );
+
+program
+  .command("scaffold")
+  .description(
+    "Generates a model scaffold with the specified name and attributes. " +
+      "The attributes define the fields of the model in the format FIELDNAME:TYPE. " +
+      "Scaffold command will generate the model, controller and routes for the given attributes. It will generate all the CRUD endpoints."
+  )
+  .usage("<modelName> <attributes...>")
+  .argument("<modelName>", "Specify the name of the model.")
+  .argument("<attributes...>", "Attributes for the model. [FIELDNAME:TYPE]")
+  .action((modelName, attributes) => {
+    checkModelStruct();
+    checkControllerStruct();
+    checkRoutesStruct();
+
+    scaffold(modelName, attributes);
+  });
 
 program.parse(process.argv);
